@@ -11,7 +11,7 @@ namespace Crime.API.Data
 {
     public class CrimeContext
     {
-        public IMongoCollection<CrimeEvent> Crimes { get; }
+        
         public CrimeContext(IConfiguration configuration)
         {
             var client = new MongoClient(configuration["DatabaseSettings:ConnectionString"]);
@@ -20,7 +20,7 @@ namespace Crime.API.Data
             Crimes = database.GetCollection<CrimeEvent>(configuration["DatabaseSettings:CollectionName"]);
             SeedData(Crimes);
         }
-
+        public IMongoCollection<CrimeEvent> Crimes { get; }
         private static void SeedData(IMongoCollection<CrimeEvent> crimeCollection)
         {
             bool existCrimes = crimeCollection.Find(p => true).Any();

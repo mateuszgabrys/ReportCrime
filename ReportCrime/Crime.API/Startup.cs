@@ -1,4 +1,6 @@
 using Crime.API.Data;
+using Crime.API.Repository;
+using Crime.API.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -34,6 +36,9 @@ namespace Crime.API
             });
 
             services.AddScoped<CrimeContext>();
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+            services.AddScoped<ICrimeRepository, CrimeRepository>();
+            services.AddScoped<ICrimeService, CrimeService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
